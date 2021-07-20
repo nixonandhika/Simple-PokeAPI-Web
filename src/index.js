@@ -8,9 +8,11 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-} from "@apollo/client";
+} from '@apollo/client';
 
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from '@chakra-ui/react';
+
+import UserProvider from "contexts/UserProvider";
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.vercel.app/api/graphql',
@@ -20,7 +22,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <ChakraProvider>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </ChakraProvider>
   </ApolloProvider>,
   document.getElementById('root')

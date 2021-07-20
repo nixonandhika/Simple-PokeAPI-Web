@@ -10,6 +10,7 @@ module.exports = {
     path.resolve(__dirname, './src/index.js')
   ],
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, './dist'),
     filename: '[name].[contenthash:8].js',
     clean: true
@@ -20,14 +21,15 @@ module.exports = {
     inline: true,
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
-  devtool: 'eval-cheap-module-source-map',
+  devtool: 'eval-source-map',
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
       components: path.resolve(__dirname, './src/components'),
       contexts: path.resolve(__dirname, './src/contexts'),
-      images: path.resolve(__dirname, './src/images'),
+      assets: path.resolve(__dirname, './src/assets'),
       pages: path.resolve(__dirname, './src/pages'),
       styles: path.resolve(__dirname, './src/styles'),
       utils: path.resolve(__dirname, './src/utils')
