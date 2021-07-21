@@ -359,7 +359,7 @@ const PokemonDetail = ({
                     src={pokemonOverview?.data?.pokemons?.results[0]?.artwork}
                     alt={`${data?.pokemon?.name}-img`}
                   />
-                ) : <Skeleton />}
+                ) : <Skeleton circle css={css`width: 100%`} />}
               </div>
 
               <div css={PokemonInfoContainer}>
@@ -373,7 +373,7 @@ const PokemonDetail = ({
                     font-size: 24px;
                   }
                 `}>
-                  {data ? '#' + padLeadingZeroes(data?.pokemon?.id, 4) : <Skeleton />}
+                  {data ? '#' + padLeadingZeroes(data?.pokemon?.id, 4) : <Skeleton width={108} />}
                 </div>
 
                 <div css={css`
@@ -387,7 +387,7 @@ const PokemonDetail = ({
                     font-size: 36px;
                   }
                 `}>
-                  {data ? data.pokemon.name : <Skeleton />}
+                  {data ? data.pokemon.name : <Skeleton width={216} />}
                 </div>
 
                 <div css={css`
@@ -417,7 +417,22 @@ const PokemonDetail = ({
                       </div>
                     ))
                   ) : (
-                    <Skeleton />
+                    <>
+                      <Skeleton
+                        css={css`
+                          height: 32px;
+                          width: 75px;
+                        `}
+                        style={{ borderRadius: 16 }}
+                      />
+                      <Skeleton
+                        css={css`
+                          height: 32px;
+                          width: 75px;
+                        `}
+                        style={{ borderRadius: 16 }}
+                      />
+                    </>
                   )}
                 </div>
 
@@ -467,18 +482,21 @@ const PokemonDetail = ({
                     `}
                   >
                     {data?.pokemon?.moves.map((item, index) => (
-                      <div css={css`
-                        background-color: rgba(112, 110, 109, 0.5);
-                        border-radius: 8px;
-                        color: white;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 8px;
-                        font-weight: 500;
-                        text-align: center;
-                        text-transform: capitalize;
-                      `}>
+                      <div
+                        key={`moves-${index}`}
+                        css={css`
+                          background-color: rgba(112, 110, 109, 0.5);
+                          border-radius: 8px;
+                          color: white;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          padding: 8px;
+                          font-weight: 500;
+                          text-align: center;
+                          text-transform: capitalize;
+                        `}
+                      >
                         {item.move.name.replace(/-/g, " ")}
                       </div>
                     ))}
