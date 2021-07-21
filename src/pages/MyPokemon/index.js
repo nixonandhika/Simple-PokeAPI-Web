@@ -50,7 +50,6 @@ const PokemonList = ({
     }
 
     ${mq("sm")} {
-      grid-template-columns: repeat(auto-fit, 100px);
       margin-top: 16px;
     }
   `;
@@ -112,12 +111,18 @@ const PokemonList = ({
               }
             `}
           >
-            TOTAL POKEMON OWNED: {user?.owned?.length}
+            Total Pokemon Owned: {user?.owned?.length}
           </div>
 
           <div css={PokemonListStyle}>
             {user?.owned?.map((item, index) => (
-              <PokemonItem key={`pokemon-${index}`} pokemon={item} releasable index={index} />
+              <PokemonItem
+                key={`pokemon-${index}`}
+                width={width}
+                pokemon={item}
+                releasable
+                index={index}
+              />
             ))}
           </div>
         </div>

@@ -353,7 +353,7 @@ const PokemonDetail = ({
                   src={PokeballLogo}
                   alt="pokeball-logo"
                 />
-                {pokemonOverview ? (
+                {pokemonOverview?.data?.pokemons?.results[0]?.artwork ? (
                   <img
                     css={PokemonImageStyle}
                     src={pokemonOverview?.data?.pokemons?.results[0]?.artwork}

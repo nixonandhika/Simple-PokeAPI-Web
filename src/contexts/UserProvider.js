@@ -25,7 +25,8 @@ const UserProvider = ({ children }) => {
     if (owned.length === 0) {
       setNewOwned([]);
     } else {
-      let newList = owned.splice(index + 1, 1);
+      let newList = Object.assign([], owned);
+      newList.splice(index, 1);
       setNewOwned(newList);
     }
   }

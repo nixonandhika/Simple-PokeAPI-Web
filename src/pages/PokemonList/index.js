@@ -151,7 +151,7 @@ const PokemonList = ({
               }
             `}
           >
-            TOTAL POKEMON OWNED: {user?.owned?.length}
+            Total Pokemon Owned: {user?.owned?.length}
           </div>
 
           <div css={css`

@@ -14,6 +14,7 @@ import { mq, typeColor } from "styles/global";
 import { padLeadingZeroes } from "utils";
 
 const PokemonItem = ({
+  width,
   pokemon,
   releasable,
   index,
@@ -88,7 +89,7 @@ const PokemonItem = ({
     display: grid;
     grid-template-columns: repeat(auto-fit, 70px);
     grid-gap: 8px;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 8px;
     font-size: 12px;
 
@@ -154,7 +155,13 @@ const PokemonItem = ({
       </a>
 
       {releasable && (
-        <Button colorScheme="whiteAlpha" size="md" mt={2} mb={2} onClick={handleReleasePokemon}>
+        <Button
+          colorScheme="whiteAlpha"
+          size={width > 768 ? "md" : "xs"}
+          mt={2}
+          mb={2}
+          onClick={handleReleasePokemon}
+        >
           Release
         </Button>
       )}
