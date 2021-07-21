@@ -1,17 +1,28 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
+import {
+  Button,
+  useToast
+} from '@chakra-ui/react';
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 
-import { mq } from "styles/global";
+import { useUser } from "contexts/UserContext";
+
+import { mq, typeColor } from "styles/global";
 
 import { padLeadingZeroes } from "utils";
 
 const PokemonItem = ({
-  pokemon
+  pokemon,
+  releasable,
+  index,
 }) => {
+  const user = useUser();
+  const toast = useToast();
+  const toastId = "releaseToast";
+
   const ItemStyle = css`
-    // background-color: black;
     cursor: pointer;
     position: relative;
     border-radius: 16px;
@@ -73,22 +84,100 @@ const PokemonItem = ({
     }
   `;
 
+  const TypeStyle = css`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 70px);
+    grid-gap: 8px;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 12px;
+
+    ${mq("xl")} {
+      grid-template-columns: repeat(auto-fit, 55px);
+      font-size: 10px;
+    }
+
+    ${mq("lg")} {
+      grid-template-columns: repeat(auto-fit, 45px);
+      font-size: 10px;
+    }
+
+    ${mq("md")} {
+      grid-template-columns: 1fr;
+      grid-gap: 4px;
+    }
+  `;
+
+  const handleReleasePokemon = () => {
+    if (!toast.isActive(toastId)) {
+      user.releasePokemon(index);
+      toast({
+        id: toastId,
+        duration: 1000,
+        title: `You released "${pokemon.nickname}"!`,
+        status: "success",
+        isClosable: true
+      })
+    }
+  }
+
   return (
-    <a
+    <div
       css={ItemStyle}
       href={`/detail/${pokemon.name}`}
     >
       <div css={NumberStyle}>
-        {padLeadingZeroes(pokemon.id, 3)}
+        {padLeadingZeroes(pokemon.id, 4)}
       </div>
-      <LazyLoad once css={css`width: 100%; z-index: 2;`}>
-        <img css={PokemonImgStyle} src={pokemon.artwork} alt={`pokemon-${pokemon.id}-img`} />
-      </LazyLoad>
+      <a
+        css={css`
+          position: relative;
+          z-index: 2;
+        `}
+        href={`/detail/${pokemon.name}`}
+      >
+        <LazyLoad once>
+          <img css={PokemonImgStyle} src={pokemon.artwork} alt={`pokemon-${pokemon.id}-img`} />
+        </LazyLoad>
 
-      <div css={PokemonNameStyle}>
-        {pokemon.name}
-      </div>
-    </a>
+        {pokemon?.nickname ? (
+          <div css={PokemonNameStyle}>
+            {pokemon.nickname}
+            <br />
+            ({pokemon.name})
+          </div>
+        ) : (
+          <div css={PokemonNameStyle}>
+            {pokemon.name}
+          </div>
+        )}
+      </a>
+
+      {releasable && (
+        <Button colorScheme="whiteAlpha" size="md" mt={2} mb={2} onClick={handleReleasePokemon}>
+          Release
+        </Button>
+      )}
+
+      {pokemon?.types && (
+        <div css={TypeStyle}>
+          {pokemon?.types?.map((item) => (
+            <div
+              key={`${pokemon.name}-type-${item.type.name}`}
+              css={css`
+                background-color: ${typeColor(item.type.name)};
+                border-radius: 8px;
+                color: white;
+                text-align: center;
+                padding: 2px;
+              `}
+            >
+              {item?.type?.name}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 

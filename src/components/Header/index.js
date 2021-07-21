@@ -1,14 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
-import {
-  IconButton,
-  Input,
-  InputGroup,
-  InputRightElement
-} from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
 
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Logo from "assets/logo192.png";
 import PokeAPILogo from "assets/pokeapi.svg";
@@ -17,7 +11,9 @@ import DummyHeader from "./DummyHeader";
 
 import { mq } from "styles/global";
 
-const Header = ({ width, bg }) => {
+const Header = ({ width }) => {
+  const history = useHistory();
+
   const HeaderStyle = css`
     backdrop-filter: blur(10px);
     position: fixed;
@@ -55,7 +51,8 @@ const Header = ({ width, bg }) => {
       padding-right: 12px;
       color: white;
       text-align: center;
-      text-shadow: 2px 2px 8px #336666;
+      text-shadow: 0px 0px 1px #336666;
+      font-weight: 500;
     }
 
     a + a {
@@ -75,36 +72,40 @@ const Header = ({ width, bg }) => {
     <>
       <header css={HeaderStyle}>
         <div css={HeaderContentStyle}>
-          <div css={css`
-        display: flex;
-        align-items: center;
-        width: 50%;
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+              width: 50%;
 
-        ${mq("sm")} {
-          width: 100%;
-        }
-      `}>
+              ${mq("sm")} {
+                justify-content: center;
+                width: 100%;
+              }
+            `}
+            onClick={() => history.push("/")}
+          >
             <img
               css={css`
-            width: 36px;
-            height: 36px
-          `}
+                width: 36px;
+                height: 36px
+              `}
               src={Logo}
               alt="pokeweb-logo"
             />
 
             <img
               css={css`
-              height: 36px;
-              margin-left: 16px;
-            `}
+                height: 36px;
+                margin-left: 16px;
+              `}
               src={PokeAPILogo}
               alt="pokeapi-logo"
             />
           </div>
           <nav css={NavStyle}>
             <a
-              href="/list"
+              href="/"
             >
               Pokemon List
             </a>

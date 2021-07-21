@@ -82,6 +82,14 @@ const PokemonList = ({
               font-weight: 700;
               text-align: center;
               width: 100%;
+
+              ${mq("lg")} {
+                font-size: 32px;
+              }
+
+              ${mq("sm")} {
+                font-size: 24px;
+              }
             `}
           >
             MY POKEMON
@@ -94,6 +102,14 @@ const PokemonList = ({
               font-weigt: 500;
               text-align: center;
               width: 100%;
+
+              ${mq("lg")} {
+                font-size: 20px;
+              }
+
+              ${mq("sm")} {
+                font-size: 18px;
+              }
             `}
           >
             TOTAL POKEMON OWNED: {user?.owned?.length}
@@ -101,7 +117,7 @@ const PokemonList = ({
 
           <div css={PokemonListStyle}>
             {user?.owned?.map((item, index) => (
-              <PokemonItem key={`pokemon-${index}`} pokemon={item} />
+              <PokemonItem key={`pokemon-${index}`} pokemon={item} releasable index={index} />
             ))}
           </div>
         </div>

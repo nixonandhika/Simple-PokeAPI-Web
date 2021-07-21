@@ -2,6 +2,7 @@
 import { jsx, css } from '@emotion/react';
 import { gql, useLazyQuery } from '@apollo/client';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Button } from "@chakra-ui/react";
 
 import { useEffect, useRef } from 'react';
 
@@ -101,8 +102,6 @@ const PokemonList = ({
         ${container_style};
         background-image: url(${currentBackground});
         background-size: 100% 100%;
-        background-color: #d1d1d1;
-        background-repeat: no-repeat;
         background-attachment: fixed;
         min-height: 100vh;
       `}
@@ -122,6 +121,14 @@ const PokemonList = ({
               font-weight: 700;
               text-align: center;
               width: 100%;
+
+              ${mq("lg")} {
+                font-size: 32px;
+              }
+
+              ${mq("sm")} {
+                font-size: 24px;
+              }
             `}
           >
             POKEMON LIST
@@ -134,9 +141,30 @@ const PokemonList = ({
               font-weigt: 500;
               text-align: center;
               width: 100%;
+
+              ${mq("lg")} {
+                font-size: 20px;
+              }
+
+              ${mq("sm")} {
+                font-size: 18px;
+              }
             `}
           >
             TOTAL POKEMON OWNED: {user?.owned?.length}
+          </div>
+
+          <div css={css`
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+            width: 100%;
+          `}>
+            <a href="/my-pokemon">
+              <Button colorScheme="whiteAlpha" size="lg">
+                Go To Inventory
+              </Button>
+            </a>
           </div>
 
           <InfiniteScroll

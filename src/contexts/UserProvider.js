@@ -22,10 +22,10 @@ const UserProvider = ({ children }) => {
   }
 
   const releasePokemon = (index) => {
-    const elementIndex = owned.indexOf(index);
-    if (elementIndex > -1) {
-      let newList = owned;
-      newList.splice(elementIndex, 1);
+    if (owned.length === 0) {
+      setNewOwned([]);
+    } else {
+      let newList = owned.splice(index + 1, 1);
       setNewOwned(newList);
     }
   }

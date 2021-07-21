@@ -6,9 +6,9 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import Home from "pages/Home";
 import PokemonList from "pages/PokemonList";
 import MyPokemon from "pages/MyPokemon";
+import PokemonDetail from "pages/PokemonDetail";
 
 import { useWindowSize } from "utils";
 
@@ -22,7 +22,6 @@ function App() {
           exact
           path="/"
         >
-          {/* <Home /> */}
           <PokemonList width={width} />
         </Route>
 
@@ -31,6 +30,13 @@ function App() {
           path="/my-pokemon"
         >
           <MyPokemon width={width} />
+        </Route>
+
+        <Route
+          exact
+          path="/detail/:name"
+        >
+          <PokemonDetail width={width} />
         </Route>
 
         {/* If no route found */}
