@@ -74,6 +74,7 @@ const Header = ({ width }) => {
         <div css={HeaderContentStyle}>
           <div
             css={css`
+              cursor: pointer;
               display: flex;
               align-items: center;
               width: 50%;

@@ -5,7 +5,7 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 module.exports = {
   target: 'web',
-  mode: 'development',
+  mode: 'production',
   entry: [
     path.resolve(__dirname, './src/index.js')
   ],
