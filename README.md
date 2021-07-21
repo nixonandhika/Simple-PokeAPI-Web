@@ -2,6 +2,8 @@
 Simple Website to show PokeAPI (https://github.com/mazipan/graphql-pokeapi).
 Built using Create React App
 
+Deployed on https://simple-poke-api-web.vercel.app/
+
 ## Techs Used
 1. React with React Hooks and React Context
 2. GraphQL with Apollo Client
